@@ -4,6 +4,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtGui import QFont
 import sys
+import os
 
 font = QFont()
 font.setBold(True)
@@ -15,6 +16,7 @@ sehir = owm.weather_at_place("Istanbul,tr")
 
 sehirdekihava = sehir.get_weather()
 print(sehirdekihava)
+
 
 sicaklikbilgisi = sehirdekihava.get_temperature('celsius')
 print(sicaklikbilgisi)
@@ -34,7 +36,7 @@ print(sehiradi)
 class Pencere(QWidget):
     def __init__(self):
         super().__init__()
-        self.setFixedSize(250,100)
+        self.setFixedSize(250,150)
         self.setWindowTitle("ProjectW")
         self.setWindowIcon(QIcon("9601-200.png"))
 
@@ -67,7 +69,15 @@ class Pencere(QWidget):
 
 
 
-
+        if havadurumu==("Clear"):
+            durumyolu = ("sun.png")
+        elif havadurumu==("Clouds"):
+            durumyolu =("b104f5bf21a9dd0a5b074f34b4508f19_download-black-cloud-clipart_512-512.png")
+        elif havadurumu==("Rain"):
+            durumyolu= ("black-cloud-with-rain_318-44337.jpg")
+        havalogo = QLabel(self)
+        havalogo.setGeometry(110,5,128,128)
+        havalogo.setPixmap(QPixmap(durumyolu))
 
 uygulama = QApplication(sys.argv)
 pencere = Pencere()
